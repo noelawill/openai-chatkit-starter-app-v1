@@ -1,23 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  async headers() {
-    return [
-      {
-        source: "/(.*)",
-        headers: [
-          {
-            key: "Content-Security-Policy",
-            value:
-              "frame-ancestors 'self' https://calonlan.org.uk https://www.calonlan.org.uk;",
-          },
-          {
-            key: "X-Frame-Options",
-            value: "ALLOWALL",
-          },
-        ],
-      },
-    ];
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...(config.resolve.alias ?? {}),
+    };
+    return config;
   },
 };
 
